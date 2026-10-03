@@ -182,7 +182,9 @@ import copy
 c = copy.deepcopy(a)
 ```
 
-（在此作答）
+a是原本的列表，b是对它的浅拷贝，c是深拷贝，
+a变b变，c不变。
+所以c不变，b是 [[1,2,99],[3,4]]   (是说将99放到第一个里)
 
 ### 第 2 题：字典与列表的综合应用
 
@@ -202,7 +204,13 @@ logs = [
 2. 写出表达式，统计每个用户出现了几次（返回字典，键为用户名，值为次数）。
 3. 解释为什么第 2 问不能直接用 `len(logs)` 得到结果，需要什么遍历结构？
 
-（在此作答）
+
+1.  [log   for log in logs if logs["level"]=="ERROR"]
+2.  numbers = {[logs["user"]]:users.count(user) for user in users}
+3.  只会得到5，不满足题意 需要for
+
+
+
 
 ### 第 3 题：异常处理设计
 
@@ -212,9 +220,20 @@ Day_10 中你写过 `safe_int(s)` 函数：能转就返回整数，不能转就�
 
 - 输入两个字符串 `a` 和 `b`
 - 尝试将它们转为数字并计算 `a / b`
-- 如果转换失败（`ValueError`）或除数为零（`ZeroDivisionError`），返回 `None`
+- 如果转换失败（``）或除数为零（``），返回 `None`
 - 否则返回商（`float`）
 
 请写出函数代码，并说明：为什么这里用 `try/except` 比先用 `if` 判断再计算更好？
 
-（在此作答）
+def safe_divide(a, b):
+    try:
+        c = float(a) / float(b)
+        return c
+    except(ValueError,ZeroDivisionError):
+        return None
+
+a = input("a=?")
+b = input("b=?")
+d = safe_divide(a, b)
+
+简洁一点，方便，不易出错
