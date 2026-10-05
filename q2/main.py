@@ -37,3 +37,14 @@ class manner:
         return True
     def list_users(self):
         return self.users.copy()
+    def save_to_json(self, filepath):
+                with open(filepath, "w", encoding="utf-8") as file:
+                    json.dump(self.users, file, ensure_ascii = False)
+    def load_from_json(self, filepath):
+        with open(filepath, "r", encoding="utf-8") as file:
+            self.users = json.load(file)
+
+        self.next_id = 1
+        for user in self.users:
+            if user["id"] >= self.next_id:
+                self.next_id = user["id"] + 1
