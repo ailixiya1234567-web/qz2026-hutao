@@ -1,14 +1,14 @@
 import json
 
 class manner:
-    def __init__(self):
+    def __init__(self):  #初始信息
         self.user = []
         self.id = 1
 
 
     def add(self,name,age):
         user = {"id":self.id,
-                "name":name,
+                "name":name,        #添加名字年龄即可添加个人，id顺延
                 "age":age
                 }
         self.user.append(user)
@@ -17,12 +17,12 @@ class manner:
 
     
     def match(self,id):
-        for user in self.user:
+        for user in self.user:        #查询
             if user["id"] == id:
                 return user
             else:
                 pass
-        return None
+        return None    #没有返回
 
     
     def update_age(self, id, age):
@@ -30,30 +30,30 @@ class manner:
 
         if user is None:
             return False
-
-        user["age"] = age
+        else:
+            user["age"] = age     #修改
         return True
 
     
     def remove(self, user_id):
-        user = self.match(user_id)
+        user = self.match(user_id)       
 
         if user is None:
             return False
-
-        self.user.remove(user)
+        else:
+            self.user.remove(user)     #删除
         return True
-    def list_users(self):
+    def list_users(self):           #列出
         return self.user.copy()
 
     
     def save_to_json(self, filepath):
-            with open(filepath, "w", encoding="utf-8") as file:
+            with open(filepath, "w", encoding="utf-8") as file:         #打开并保存为json文件
                     json.dump(self.user, file, ensure_ascii = False)
 
                     
     def load_from_json(self, filepath):
-        with open(filepath, "r", encoding="utf-8") as file:
-            self.user = json.load(file)
+        with open(filepath, "r", encoding="utf-8") as file:   
+            self.user = json.load(file)            #读取并覆盖
 
  
