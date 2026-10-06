@@ -205,9 +205,10 @@ logs = [
 3. 解释为什么第 2 问不能直接用 `len(logs)` 得到结果，需要什么遍历结构？
 
 
-1.  [log   for log in logs if logs["level"]=="ERROR"]
-2.  numbers = {[logs["user"]]:users.count(user) for user in users}
-3.  只会得到5，不满足题意 需要for
+1.  [log   for log in logs if log["level"]=="ERROR"]
+2.  users = [log["user"] for log in logs]
+    numbers = {user : users.count(user) for user in users}
+3.  只会得到5，不满足题意 需要for来遍历
 
 
 
